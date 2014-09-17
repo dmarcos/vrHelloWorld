@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VR Planetarium</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../style/main.css">
+  <link rel="stylesheet" href="../style/vr.css">
+  <link rel="stylesheet" href="scene.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="camera threed">
+      <div id="sky" class="threed">
+        <div id="ground" class="threed"></div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/vrcursor.js"></script>
+  <script src="../js/vrutils.js"></script>
+  <script src="../js/vrScene.js"></script>
+  <script>
+    var stars = [];
+    var cursor;
+    var container = document.querySelector('#container');
+
+    var starColors = [
+      "#8DA0E5",
+      "#9BAFEA",
+      "#BCCAEF",
+      "#F6F5FD"
+    ];
+
+    function generateStars(numStars) {
+      var skyElement = document.querySelector('#sky');
+      var moonElement = document.createElement('div');
+      var moonLabelElement = document.createElement('div');
+      var polarisElement = document.createElement('div');
+
+      for (i=0; i < numStars; ++i) {
+        skyElement.appendChild(generateStar(i));
+      }
+
+      polarisElement.classList.add('threed');
+      polarisElement.classList.add('star');
+      polarisElement.classList.add('polaris');
+      skyElement.appendChild(polarisElement);
+
+      moonElement.classList.add('threed');
+      moonElement.classList.add('moon');
+
+      moonLabelElement.classList.add('threed');
+      moonLabelElement.classList.add('star-label');
+      moonLabelElement.textContent = 'Moon';
+      moonElement.appendChild(moonLabelElement);
+      cursor.addHitElement(moonElement);
+      moonElement.addEventListener('mouseover', function(e) {
+        e.target.classList.add('highlighted');
+      });
+      moonElement.addEventListener('mouseout', function(e) {
+        e.target.classList.remove('highlighted');
+      });
+      stars.push({
+        'el': moonElement,
+        'ra': 0,
+        'dec': 30
+      });
+      skyElement.appendChild(moonElement);
+    }
+
+    function generateStar(id) {
+      var starElement = document.createElement('div');
+      var starLabelElement = document.createElement('div');
+      var ra = getRandomInt(0, 360);
+      var dec = getRandomInt(-180, 180);
+      var transform =
+        'rotateY(' + ra +  'deg) ' +
+        'rotateX(' + dec + 'deg) ' +
+        'translate3d(0, 0, 500px) ' +
+        'rotateY(180deg)';
+      starElement.setAttribute('id', 'star-' + id);
+      starElement.classList.add('star');
+      starElement.classList.add('threed');
+      starElement.style.transform = transform;
+      starElement.style.backgroundColor = starColors[getRandomInt(0,3)];
+
+      starLabelElement.classList.add('threed');
+      starLabelElement.classList.add('star-label');
+      starLabelElement.textContent = 'star ' + id;
+      starElement.appendChild(starLabelElement);
+
+      stars.push({
+        "el": starElement,
+        "ra": ra,
+        "dec": dec
+      });
+      cursor.addHitElement(starElement);
+      starElement.addEventListener('mouseover', function(e) {
+        e.target.classList.add('highlighted');
+      });
+      starElement.addEventListener('mouseout', function(e) {
+        e.target.classList.remove('highlighted');
+      });
+      return starElement;
+    }
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function init() {
+      var vrScene = new VRScene(document.querySelector('#container'));
+      var cursorStyle =
+        "width: 50px;" +
+        "height: 50px;" +
+        "background-color: transparent;" +
+        "border: 3px solid green;" +
+        "border-radius: 50%;";
+      cursor = new Cursor(container, cursorStyle);
+      generateStars(300);
+    }
+    window.addEventListener("load", init, false);
+  </script>
+</body>
+</html>

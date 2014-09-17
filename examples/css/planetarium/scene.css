@@ -1,0 +1,47 @@
+.star {
+  width: 2px;
+  height: 2px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.highlighted .star-label{
+  display: inline;
+}
+
+.star-label {
+  display: none;
+  color: white;
+  font-size: 30px;
+}
+
+.polaris {
+  width: 5px;
+  height: 5px;
+  transform: rotateY(0deg) rotateX(70deg) translate3d(0, 0, 500px) translate(-100px, -150px);
+}
+
+.polaris:after{
+  margin-left: 20px;
+  margin-top: 20px;
+  content: "Polaris";
+  font-size: 20px;
+  color: white;
+}
+
+.moon {
+  width: 60px;
+  height: 60px;
+  transform: rotateY(0deg) rotateX(30deg) translate3d(0, 0, 500px) translate(-100px, -150px) scaleX(-1);
+  background-image: url('../images/moon.png');
+  background-size: contain;
+}
+
+#ground {
+  background-color: brown;
+  border-radius: 50%;
+  width: 1000px; height: 1000px;
+  background-color: rgb(38, 37, 13);
+  background-image: url('../images/grass.jpg');
+  transform: translate(-500px, -500px) rotateX(90deg) translateZ(-200px);
+}

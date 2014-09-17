@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>css/vr test</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../style/main.css">
+  <link rel="stylesheet" href="../style/vr.css">
+  <link rel="stylesheet" href="scene.css">
+</head>
+
+<body>
+  <!-- this is a containing element that will be made fullscreen -->
+  <div id="container">
+    <!-- This is an inner element that will serve as a camera, moving its children around in the scene.
+         This and all its children will have transform-style: preserve-3d set via the class, as well as
+         transform-origin set to 0,0 -->
+    <div class="camera threed">
+      <!-- <img class="threed grain" src="grain.gif"> -->
+      <!-- <iframe id="pane1" class="threed pane" width="1280" height="720" src="//www.youtube.com/embed/LJSFlMCTXE8?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe> -->
+      <iframe id="pane1" class="threed" width="1280" height="720" src="//www.youtube.com/embed/dY7gsUL9Xkk?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+      <div class="threed seats row1"></div>
+      <div class="threed seats row2"></div>
+      <div class="threed seats row3"></div>
+      <div class="threed seats row4"></div>
+      <div class="threed seats row5"></div>
+      <div class="threed seats row6"></div>
+      <div class="threed seats row7"></div>
+      <div class="threed seats row8"></div>
+      <div class="threed exit">EXIT</div>
+      <div class="threed projector"></div>
+      <!-- <iframe src="http://metafilter.com"></iframe> -->
+    </div>
+  </div>
+
+  <script src="../js/vrutils.js"></script>
+  <script src="../js/vrScene.js"></script>
+  <script>
+    function init() {
+      var vrScene = new VRScene(document.querySelector('#container'));
+    }
+    window.addEventListener("load", init, false);
+  </script>
+
+</body></html>

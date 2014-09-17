@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>css/vr test</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../style/main.css">
+  <link rel="stylesheet" href="../style/vr.css">
+  <link rel="stylesheet" href="scene.css">
+</head>
+
+<body>
+  <!-- this is a containing element that will be made fullscreen -->
+  <div id="container" class="container">
+    <!-- This is an inner element that will serve as a camera, moving its children around in the scene.
+         This and all its children will have transform-style: preserve-3d set via the class, as well as
+         transform-origin set to 0,0 -->
+    <div class="camera threed">
+      <div id="pane1" class="threed pane"><img src="../images/web01.jpg"></div>
+      <div id="pane2" class="threed pane"><img src="../images/web02.jpg"></div>
+      <div id="pane3" class="threed pane"><img src="../images/web03.jpg"></div>
+      <div id="pane4" class="threed pane"><img src="../images/web04.jpg"></div>
+      <div id="bottom" class="threed"></div>
+    </div>
+  </div>
+  <script src="../js/vrUtils.js"></script>
+  <script src="../js/vrScene.js"></script>
+  <script type="text/javascript">
+
+  function init() {
+    var vrScene = new VRScene(document.querySelector('#container'));
+  }
+
+  window.addEventListener("load", init, false);
+
+  </script>
+</body>
+</html>
